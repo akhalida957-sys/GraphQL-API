@@ -1,0 +1,29 @@
+type Author {
+    id: ID!
+    name: String!
+    age: Int
+    nationality: String
+}
+
+type Book {
+    id: ID!
+    title: String!
+    pages: Int
+    authorId: ID!
+    categoryId: ID!
+    publicationYear: Int       
+    language: String 
+}
+
+type Category {
+    id: ID!
+    name: String!
+    parentCategoryId: ID
+}
+
+type Query {
+    getBooks(page: Int, size: Int): [Book]
+    getBookById(id: ID!): Book
+    getAuthors: [Author]
+    getCategories: [Category]
+}
