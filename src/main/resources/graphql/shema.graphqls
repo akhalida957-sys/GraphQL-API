@@ -27,3 +27,16 @@ type Category {
   books: [Book!]!
 }
 
+union SearchResult = Book | Author | Category
+
+type Query {
+  
+  listBooks(
+    publicationYear: Int,
+    language: String,
+    categoryId: Int,
+    recursive: Boolean,
+    page: Int!
+  ): [Book]
+  
+  }
