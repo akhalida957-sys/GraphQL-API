@@ -1,0 +1,29 @@
+type Author {
+
+  idA: ID!
+  name: String!
+  age: Int
+  nationality: String
+  books: [Book]
+}
+
+type Book {
+
+  idBook: ID!
+  title: String!
+  publicationYear: Int!
+  language: String!
+  nbPages: Int!
+  category: Category!
+  author: Author!
+}
+
+type Category {
+
+  idC: ID!
+  categoryName: String!
+  parentCategory: Category
+  subCategories: [Category!]!
+  books: [Book!]!
+}
+
