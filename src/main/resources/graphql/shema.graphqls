@@ -44,3 +44,20 @@ type Query {
   search(keyword: String!, type: String, page: Int!, size: Int!): [SearchResult]
   
   }
+  
+  type Mutation {
+
+  #  Ajouter un livre (ADMIN)
+  
+  addBook(
+    title: String!
+    publicationYear: Int!
+    nbrpages: Int!
+    language: String!
+    authorId: Int!
+    categoryId: Int!
+  ): Book
+
+  #  Supprimer un auteur + tous ses livres (ADMIN)
+  deleteAuthor(authorId: Int!): Boolean
+}

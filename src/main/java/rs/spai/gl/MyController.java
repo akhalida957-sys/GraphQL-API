@@ -131,6 +131,36 @@ public class MyController {
 	    return result.subList(start, end);
 	}
 	
+	// ------------------------  Add a new Book  ---------------------	
+		@MutationMapping
+		public Book addBook(@Argument String title,@Argument int publicationYear,@Argument int nbrpages,@Argument String language,@Argument int authorId,@Argument int categoryId) {
+
+		    Author author = autRepo.findById(authorId)
+		            .orElseThrow(() -> new RuntimeException("Author not found"));
+
+		    Category category = catRepo.findById(categoryId)
+		            .orElseThrow(() -> new RuntimeException("Category not found"));
+
+		    Book book = Book.builder()
+		            .title(title)
+		            .publicationYear(publicationYear)
+		            .pages(nbrpages)
+		            .language(language)
+		            .author(author)
+		            .category(category)
+		            .build();
+
+		    return bookRepo.save(book);
+		}
+
+	//  ----------------------  Delet an author --------
+		
+		@MutationMapping
+		public Boolean deleteAuthor(@Argument int authorId) {
+		    autRepo.deleteById(authorId);
+		    return true;
+		}
+	
 
 
 }
