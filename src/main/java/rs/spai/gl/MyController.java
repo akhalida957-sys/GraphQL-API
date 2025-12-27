@@ -87,6 +87,50 @@ public class MyController {
 	        collectCategoryIds(child.getIdC(), categoryIds);
 	    }
 	}
+	
+// --------------------   	 booksByAuthor ------------------
+	
+	@QueryMapping
+	public List<Book> booksByAuthor(@Argument Long authorId) {
+	    return bookRepo.findAll().stream()
+	            .filter(b -> b.getAuthorId() != null &&
+	                         b.getAuthorId().getIdA() == authorId).toList();
+	}
+
+	
+	// --------------------   	 search   ------------------	
+	
+	@QueryMapping
+	public List<Object> search( @Argument String keyword,  @Argument String type, @Argument int page) {
+	    List<Object> result = new ArrayList<>();
+
+	    if (type == null || type.equalsIgnoreCase("Book")) {
+	        result.addAll(bookRepo.findAll().stream()
+	            .filter(b -> b.getTitle().toLowerCase().contains(keyword.toLowerCase()))
+	            .toList());
+	    }
+	    if (type == null || type.equalsIgnoreCase("Author")) {
+	        result.addAll(autRepo.findAll().stream()
+	            .filter(a -> a.getName().toLowerCase().contains(keyword.toLowerCase()))
+	            .toList());
+	    }
+	    if (type == null || type.equalsIgnoreCase("Category")) {
+	        result.addAll(catRepo.findAll().stream()
+	            .filter(c -> c.getCategoryName().toLowerCase().contains(keyword.toLowerCase())) // Correction
+	            .toList());
+	    }
+
+	    int start = (page - 1) * defaultPageSize;
+	    int end = Math.min(start + defaultPageSize, result.size());
+
+	    // Vérifiez si le début est supérieur à la taille de la liste
+	    if (start < 0 || start >= result.size()) {
+	        return Collections.emptyList();
+	    }
+
+	    return result.subList(start, end);
+	}
+	
 
 
 }

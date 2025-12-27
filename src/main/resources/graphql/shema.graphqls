@@ -39,4 +39,8 @@ type Query {
     page: Int!
   ): [Book]
   
+    booksByAuthor(authorId: ID!): [Book]
+  
+  search(keyword: String!, type: String, page: Int!, size: Int!): [SearchResult]
+  
   }
