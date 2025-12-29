@@ -13,6 +13,6 @@ RUN chmod +x mvnw && ./mvnw clean package -DskipTests
 # Exposer le port
 EXPOSE 8080
 
-# Lancer l'application
-CMD ["java", "-jar", "target/*.jar"]
+# Lancer le WAR produit
+CMD ["java", "-jar", "target/gl-0.0.1-SNAPSHOT.war"]
 
