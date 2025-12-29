@@ -72,12 +72,12 @@ INSERT INTO author (name, age, nationality) VALUES
 
 
 INSERT INTO category (c_name, parent_category) VALUES
-('Fiction', 0),
-('Non-Fiction', 0),
-('Science', 0),
-('Technology',0),
-('History', 0),
-('Biography',0),
+('Fiction',  NULL),
+('Non-Fiction',  NULL),
+('Science',  NULL),
+('Technology', NULL),
+('History',  NULL),
+('Biography', NULL),
 ('Fantasy', 1),
 ('Romance', 1),
 ('Mystery', 1),
