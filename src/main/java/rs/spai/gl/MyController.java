@@ -38,7 +38,7 @@ public class MyController {
 	       @Argument Boolean recursive, // true = inclure sous-catégories
 	        @Argument int page) {
 
-
+        // On récupère tous les livres depuis la base de données
 	    List<Book> books = bookRepo.findAll();
 
 	    // Filtre par publicationYear
@@ -59,6 +59,8 @@ public class MyController {
 	    if (categoryId != null) {
 	        if (Boolean.TRUE.equals(recursive)) {
 	            // Inclure sous-catégories
+	        	
+	        	// stocker les IDs de sous-catégories
 	            Set<Integer> categoryIds = new HashSet<>();
 	            collectCategoryIds(categoryId, categoryIds);
 	            books = books.stream()
@@ -81,7 +83,7 @@ public class MyController {
 
 	// Méthode récursive pour récupérer toutes les sous-catégories
 	private void collectCategoryIds(int parentId, Set<Integer> categoryIds) {
-	    categoryIds.add(parentId);
+	    categoryIds.add(parentId);  // ajouter la catégorie actuelle
 	    List<Category> children = catRepo.findByParentCategory_IdC(parentId);
 	    for (Category child : children) {
 	        collectCategoryIds(child.getIdC(), categoryIds);
@@ -150,7 +152,7 @@ public class MyController {
 		            .category(category)
 		            .build();
 
-		    return bookRepo.save(book);
+		    return bookRepo.save(book); // insère le livre dans la base
 		}
 
 	//  ----------------------  Delet an author --------

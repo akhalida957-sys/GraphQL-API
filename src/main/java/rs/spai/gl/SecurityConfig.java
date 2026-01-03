@@ -12,14 +12,15 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    http
+	    // CSRF (Cross-Site Request Forgery) protège contre certaines attaques web.
 	        .csrf(csrf -> csrf.disable())
 	        .authorizeHttpRequests(auth -> auth
 	            .requestMatchers("/h2/**").permitAll() // Autoriser la console H2
 	            .anyRequest().hasRole("ADMIN")        // Tout le reste = ADMIN
 	        )
 	        .headers(headers -> headers.frameOptions().sameOrigin()) // Nécessaire pour H2
-	        .httpBasic();
+	        .httpBasic();// Active l’authentification HTTP Basic.
 
-	    return http.build();
+	    return http.build(); // renvoie la chaîne de filtres de sécurité.
 	}
 }

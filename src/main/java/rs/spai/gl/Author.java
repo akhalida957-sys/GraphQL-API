@@ -30,6 +30,7 @@ public class Author {
     private String nationality;
     
     // quand un auteur est supprimé -> tous ses livres sont supprimés automatiquement
+    // signifie que un Author peut avoir plusieurs Book
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Book> books;
 

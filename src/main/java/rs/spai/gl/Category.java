@@ -30,11 +30,11 @@ public class Category {
     
     
     
-    @ManyToOne
+    @ManyToOne // beaucoup de sous-catégories peuvent partager le même parent
     @JoinColumn(name = "parentCategory")  // --> colonne INT en SQL
     private Category parentCategory;
 
-    @OneToMany(mappedBy = "parentCategory")
+    @OneToMany(mappedBy = "parentCategory") // Chaque catégorie peut avoir plusieurs sous-catégories
     private List<Category> subCategories;
     
     @OneToMany(mappedBy = "category")
